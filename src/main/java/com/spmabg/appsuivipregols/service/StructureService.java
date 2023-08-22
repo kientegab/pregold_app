@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.spmabg.appsuivipregols.entity.Ministere;
 import com.spmabg.appsuivipregols.entity.Structure;
 import com.spmabg.appsuivipregols.repository.StructureRepository;
 
@@ -38,6 +38,7 @@ public class StructureService {
             Structure structure = optionalStructure.get();
             structure.setLibelle(updatedStructure.getLibelle());
             structure.setSigle(updatedStructure.getSigle());
+            structure.setMinistere(updatedStructure.getMinistere());
             return Optional.of(structureRepository.save(structure));
         } else {
         	return Optional.empty();

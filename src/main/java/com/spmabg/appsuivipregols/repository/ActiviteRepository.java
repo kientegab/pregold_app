@@ -1,6 +1,7 @@
 package com.spmabg.appsuivipregols.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +14,8 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
 	@Query("SELECT a FROM Activite a WHERE a.indicateur.id = :indicateurId")
     List<Activite> findByIndicateurId(Long indicateurId);
+	
+	Optional<Activite> findByIdActivite(int activiteId);
 
 }
 

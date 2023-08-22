@@ -51,6 +51,10 @@ public class ActiviteService {
 	        } catch (MessagingException e) {
 	            e.printStackTrace();
 	        }
+	        
+	        if (activite.getDocument() == null) {
+	            activite.setDocument(null);
+	        }
 
 	        return newActivite;
 	    }
@@ -78,7 +82,7 @@ public class ActiviteService {
             activite.setDateFin(updatedActivite.getDateFin());
             activite.setNombreparticipant(updatedActivite.getNombreparticipant());
             activite.setDescription(updatedActivite.getDescription());
-            activite.setSible(updatedActivite.getSible());
+            activite.setCible(updatedActivite.getCible());
             
             return Optional.of(activiteRepository.save(activite));
         } else {

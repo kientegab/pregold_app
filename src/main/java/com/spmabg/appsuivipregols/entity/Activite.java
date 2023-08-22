@@ -32,7 +32,7 @@ public class Activite {
     
     private String description;
      
-    private Number sible;
+    private Integer cible;
     
    
     
@@ -76,12 +76,12 @@ public class Activite {
 		this.description = description;
 	}
 
-	public Number getSible() {
-		return sible;
+	public Integer getCible() {
+		return cible;
 	}
 
-	public void setSible(Number sible) {
-		this.sible = sible;
+	public void setCible(Integer cible) {
+		this.cible = cible;
 	}
 
 	
@@ -131,10 +131,10 @@ public class Activite {
     private Indicateur indicateur;
     
     @OneToOne(targetEntity = Document.class)
-	@JoinColumn(name="document_id",nullable = false)
+	@JoinColumn(name="document_id")
     private Document document;
     
-    @OneToOne(targetEntity = Structure.class)
+    @ManyToOne(targetEntity = Structure.class)
    	@JoinColumn(name="structure_id",nullable = false)
     private Structure structure;
     

@@ -1,17 +1,12 @@
 package com.spmabg.appsuivipregols.entity;
 
-import java.util.List;
-
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -19,82 +14,63 @@ import lombok.Data;
 @Data
 @Table(name="evaluation")
 public class Evaluation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String date;
-    private double valeur_activite;
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "structure_seq")
+    @Column(name = "evaluation_id", nullable = false)
+    private int idEvaluation;
 
-	public Long getId() {
-		return id;
+    private int  valeur;
+    private double poids;
+    private double taux;
+
+    public int getIdEvaluation() {
+		return idEvaluation;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdEvaluation(int idEvaluation) {
+		this.idEvaluation = idEvaluation;
 	}
 
-	public String getDate() {
-		return date;
+	public int getValeur() {
+		return valeur;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setValeur(int valeur) {
+		this.valeur = valeur;
 	}
 
-	public double getValeur_activite() {
-		return valeur_activite;
+	public double getPoids() {
+		return poids;
 	}
 
-	public void setValeur_activite(double valeur_activite) {
-		this.valeur_activite = valeur_activite;
+	public void setPoids(double poids) {
+		this.poids = poids;
 	}
 
-	public double getTaux_activite() {
-		return taux_activite;
+	public double getTaux() {
+		return taux;
 	}
 
-	public void setTaux_activite(double taux_activite) {
-		this.taux_activite = taux_activite;
+	public void setTaux(double taux) {
+		this.taux = taux;
 	}
 
-	public String getStatut_activite() {
-		return statut_activite;
+	public Activite getActivite() {
+		return activite;
 	}
 
-	public void setStatut_activite(String statut_activite) {
-		this.statut_activite = statut_activite;
+	public void setActivite(Activite activite) {
+		this.activite = activite;
 	}
 
-	public String getObservation() {
-		return observation;
-	}
+	@ManyToOne(targetEntity = Activite.class)
+    @JoinColumn(name = "activite_id", nullable = false)
+    private Activite activite;
 
-	public void setObservation(String observation) {
-		this.observation = observation;
-	}
-
-	public List<String> getActivites() {
-		return activites;
-	}
-
-	public void setActivites(List<String> activites) {
-		this.activites = activites;
-	}
-
-	private double taux_activite;
-    private String statut_activite;
-    private String observation;
-    
-    @ElementCollection
-    @CollectionTable(name = "evaluation_activites", joinColumns = @JoinColumn(name = "evaluation_id"))
-    @Column(name = "activite")
-    private List<String> activites;
+	
     
     
     
     
     
 }
-
-

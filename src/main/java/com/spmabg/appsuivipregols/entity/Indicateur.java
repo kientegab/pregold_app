@@ -22,7 +22,7 @@ public class Indicateur {
 	
     private String libelle;
     
-    private String valeur;
+    private Double valeur;
 
 	public Long getIdIndicateur() {
 		return idIndicateur;
@@ -40,11 +40,11 @@ public class Indicateur {
 		this.libelle = libelle;
 	}
 
-	public String getValeur() {
+	public Double getValeur() {
 		return valeur;
 	}
 
-	public void setValeur(String valeur) {
+	public void setValeur(Double valeur) {
 		this.valeur = valeur;
 	}
 

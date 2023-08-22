@@ -19,9 +19,7 @@ public class Ministere {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-	
-	
-	
+
 	@JoinColumn(name="ministere_id",nullable = false)
     private Long idMinistere;
     
