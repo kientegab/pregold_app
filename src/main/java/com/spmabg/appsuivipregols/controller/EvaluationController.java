@@ -18,7 +18,7 @@ import com.spmabg.appsuivipregols.entity.Activite;
 import com.spmabg.appsuivipregols.entity.Indicateur;
 import com.spmabg.appsuivipregols.service.EvaluationService;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:8000")
 @RestController
 @RequestMapping("/api")
 public class EvaluationController {
