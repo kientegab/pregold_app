@@ -1,0 +1,5 @@
+
+ALTER TABLE evaluation
+ALTER COLUMN valeur TYPE INTEGER
+USING valeur::INTEGER;
+

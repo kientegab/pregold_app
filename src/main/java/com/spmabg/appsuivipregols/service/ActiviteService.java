@@ -52,10 +52,7 @@ public class ActiviteService {
 	            e.printStackTrace();
 	        }
 	        
-	        if (activite.getDocument() == null) {
-	            activite.setDocument(null);
-	        }
-
+	        
 	        return newActivite;
 	    }
 
@@ -77,6 +74,8 @@ public class ActiviteService {
             Activite activite = optionalActivite.get();
             activite.setLibelle(updatedActivite.getLibelle());
             activite.setIndicateur(updatedActivite.getIndicateur());
+            activite.setStructure(updatedActivite.getStructure());
+            activite.setDocument(updatedActivite.getDocument());
             activite.setLieu(updatedActivite.getLieu());
             activite.setDateDebut(updatedActivite.getDateDebut());
             activite.setDateFin(updatedActivite.getDateFin());
@@ -93,9 +92,16 @@ public class ActiviteService {
     public void deleteActivite(Long id) {
         Optional<Activite> optionalActivite = activiteRepository.findById(id);
         if (optionalActivite.isPresent()) {
+            Activite activite = optionalActivite.get();
             activiteRepository.deleteById(id);
         } else {
             throw new IllegalArgumentException("Activite not found");
         }
     }
+    
+
+
+
+
+
 }

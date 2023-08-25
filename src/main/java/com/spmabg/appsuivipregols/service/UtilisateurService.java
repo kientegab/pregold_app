@@ -36,8 +36,7 @@ public class UtilisateurService {
 	    }
 	    
 	    public Utilisateur enregistrerUtilisateur(Utilisateur utilisateur) {
-	    	Profil profil = profilRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("Profil not found"));
-	    	utilisateur.setProfil(profil);
+	    	
 	        return utilisateurRepository.save(utilisateur);
 	    }
 
@@ -49,14 +48,30 @@ public class UtilisateurService {
 	        	utilisateur.setNom(updatedUtilisateur.getNom());
 	        	utilisateur.setPrenom(updatedUtilisateur.getPrenom());
 	        	utilisateur.setEmail(updatedUtilisateur.getEmail());
-	        	
+	        	utilisateur.setProfil(updatedUtilisateur.getProfil());
+	        	utilisateur.setStructure(updatedUtilisateur.getStructure());
 	        	utilisateur.setPassword(updatedUtilisateur.getPassword());
 	            return Optional.of (utilisateurRepository.save(utilisateur));
 	        } else {
 	        	throw new IllegalArgumentException("Utilisateur not found");
 	        }
 	    }
+	    
+	    public String getNomCompletUtilisateur(Long id) {
+	        Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findById(id);
+	        if (optionalUtilisateur.isPresent()) {
+	            Utilisateur utilisateur = optionalUtilisateur.get();
+	            return utilisateur.getNom() + "." + utilisateur.getPrenom();
+	        } else {
+	            throw new IllegalArgumentException("Utilisateur not found");
+	        }
+	    }
+	    
+	    
+	    
 
+	    
+	    
 	    public void deleteUtilisateur(Long id) {
 	        Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findById(id);
 	        if (optionalUtilisateur.isPresent()) {

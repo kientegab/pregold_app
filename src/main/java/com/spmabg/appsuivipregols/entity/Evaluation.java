@@ -1,5 +1,9 @@
 package com.spmabg.appsuivipregols.entity;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -15,15 +20,19 @@ import lombok.Data;
 @Table(name="evaluation")
 public class Evaluation {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "structure_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evaluation_seq")
     @Column(name = "evaluation_id", nullable = false)
     private int idEvaluation;
 
     private int  valeur;
     private double poids;
     private double taux;
+    
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate date; 
+    
 
-    public int getIdEvaluation() {
+	public int getIdEvaluation() {
 		return idEvaluation;
 	}
 
@@ -55,6 +64,14 @@ public class Evaluation {
 		this.taux = taux;
 	}
 
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
 	public Activite getActivite() {
 		return activite;
 	}
@@ -63,9 +80,23 @@ public class Evaluation {
 		this.activite = activite;
 	}
 
+	public Periode getPeriode() {
+		return periode;
+	}
+
+	public void setPeriode(Periode periode) {
+		this.periode = periode;
+	}
+
 	@ManyToOne(targetEntity = Activite.class)
     @JoinColumn(name = "activite_id", nullable = false)
     private Activite activite;
+	
+	@ManyToOne(targetEntity = Periode.class)
+	@JoinColumn(name = "periode_id")
+	private Periode periode;
+
+	
 
 	
     

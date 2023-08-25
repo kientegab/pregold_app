@@ -94,7 +94,7 @@ public class Utilisateur {
 	    private Structure structure;
 	    
 	    @ManyToOne(targetEntity = Profil.class)
-		@JoinColumn(name="profil_id",nullable = false)
+		@JoinColumn(name="profil_id",nullable = true)
 	    private Profil profil;
 	    
 }

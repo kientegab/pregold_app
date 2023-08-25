@@ -20,9 +20,8 @@ public class Periode {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-	
-	@JoinColumn(name="document_id",nullable = false)
-	private Long idDocument;
+
+	private Long idPeriode;
     
 	private String libelle;
     
@@ -30,12 +29,12 @@ public class Periode {
 	private LocalDate dateDebut;
 	
 	
-	public Long getIdDocument() {
-		return idDocument;
+	public Long getIdPeriode() {
+		return idPeriode;
 	}
 
-	public void setIdDocument(Long idDocument) {
-		this.idDocument = idDocument;
+	public void setIdPeriode(Long idPeriode) {
+		this.idPeriode = idPeriode;
 	}
 
 	public String getLibelle() {
@@ -62,28 +61,10 @@ public class Periode {
 		this.dateFin = dateFin;
 	}
 
-	public Boolean getOuvert() {
-		return ouvert;
-	}
-
-	public void setOuvert(Boolean ouvert) {
-		this.ouvert = ouvert;
-	}
-
-	public Boolean getVerrouiller() {
-		return verrouiller;
-	}
-
-	public void setVerrouiller(Boolean verrouiller) {
-		this.verrouiller = verrouiller;
-	}
-
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dateFin;
     
-    private Boolean ouvert;
     
-    private Boolean verrouiller;
     
     
    

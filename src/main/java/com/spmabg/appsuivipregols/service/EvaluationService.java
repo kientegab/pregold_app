@@ -13,10 +13,14 @@ import com.spmabg.appsuivipregols.entity.Activite;
 import com.spmabg.appsuivipregols.repository.ActiviteRepository;
 import com.spmabg.appsuivipregols.repository.EvaluationRepository;
 import com.spmabg.appsuivipregols.repository.IndicateurRepository;
+import com.spmabg.appsuivipregols.repository.PeriodeRepository;
 import com.spmabg.appsuivipregols.entity.Evaluation;
 import com.spmabg.appsuivipregols.entity.Indicateur;
+import com.spmabg.appsuivipregols.entity.Periode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -31,6 +35,9 @@ public class EvaluationService {
     private EvaluationRepository evaluationRepository;
     
     @Autowired
+    private PeriodeRepository periodeRepository;
+    
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public List<Indicateur> getAllIndicateurs() {
@@ -43,8 +50,7 @@ public class EvaluationService {
     public List<Activite> getActivitesPourIndicateur(Long idIndicateur) {
         return activiteRepository.findByIndicateurId(idIndicateur);
     }
-    
-    public Map<String, Double> calculateTaux(List<Map<String, Object>> activitesEvaluees) {
+   public Map<String, Double> calculateTaux(List<Map<String, Object>> activitesEvaluees) {
         Map<String, Double> tauxMap = new HashMap<>();
         double tauxTotal = 0.0;
 
@@ -59,7 +65,7 @@ public class EvaluationService {
             Object poidsObject = activiteData.get("poids");
             
             if (valeurObject instanceof Number && poidsObject instanceof Number) {
-                int valeur = ((Number) valeurObject).intValue();
+                int valeur = ((Number) valeurObject).intValue(); // Convert to int
                 double poids = ((Number) poidsObject).doubleValue();
 
                 Optional<Activite> activiteOptional = activiteRepository.findByIdActivite(activiteId);
@@ -75,8 +81,10 @@ public class EvaluationService {
                         evaluation = new Evaluation();
                         evaluation.setActivite(activite);
                     }
-
-                    evaluation.setValeur((int) valeur);
+                   
+                    evaluation.setDate(LocalDate.now());
+                    
+                    evaluation.setValeur(valeur); // Assign the int value directly
                     evaluation.setPoids(poids);
                     evaluation.setTaux(tauxActivite);
 
@@ -94,13 +102,15 @@ public class EvaluationService {
         }
 
         if (indicateur != null) {
-            indicateur.setValeur(tauxTotal);
+            indicateur.setTaux(tauxTotal);
             indicateurRepository.save(indicateur);
         }
 
         System.out.println("Total taux calculated: " + tauxTotal);
         return tauxMap;
     }
+
+
 
 
 }

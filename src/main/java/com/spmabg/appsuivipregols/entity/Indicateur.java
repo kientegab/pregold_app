@@ -22,7 +22,7 @@ public class Indicateur {
 	
     private String libelle;
     
-    private Double valeur;
+    private Double taux;
 
 	public Long getIdIndicateur() {
 		return idIndicateur;
@@ -40,12 +40,12 @@ public class Indicateur {
 		this.libelle = libelle;
 	}
 
-	public Double getValeur() {
-		return valeur;
+	public Double getTaux() {
+		return taux;
 	}
 
-	public void setValeur(Double valeur) {
-		this.valeur = valeur;
+	public void setTaux(Double taux) {
+		this.taux = taux;
 	}
 
 	

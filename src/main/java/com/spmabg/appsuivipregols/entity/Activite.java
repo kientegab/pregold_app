@@ -34,6 +34,7 @@ public class Activite {
      
     private Integer cible;
     
+    private String document;
    
     
     public Long getIdActivite() {
@@ -94,11 +95,11 @@ public class Activite {
 		this.indicateur = indicateur;
 	}
 
-	public Document getDocument() {
+	public String getDocument() {
 		return document;
 	}
 
-	public void setDocument(Document document) {
+	public void setDocument(String document) {
 		this.document = document;
 	}
 
@@ -130,9 +131,8 @@ public class Activite {
 	@JoinColumn(name="indicateur_id",nullable = false)
     private Indicateur indicateur;
     
-    @OneToOne(targetEntity = Document.class)
-	@JoinColumn(name="document_id")
-    private Document document;
+    
+   
     
     @ManyToOne(targetEntity = Structure.class)
    	@JoinColumn(name="structure_id",nullable = false)

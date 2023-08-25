@@ -39,8 +39,6 @@ public class PeriodeService {
         	periode.setLibelle(updatedPeriode.getLibelle());
         	periode.setDateDebut(updatedPeriode.getDateDebut());
         	periode.setDateFin(updatedPeriode.getDateFin());
-        	periode.setOuvert(updatedPeriode.getOuvert());
-        	periode.setVerrouiller(updatedPeriode.getVerrouiller());
         	 return Optional.of(periodeRepository.save(periode));
         } else {
         	return Optional.empty();

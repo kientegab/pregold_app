@@ -8,6 +8,4 @@ import com.spmabg.appsuivipregols.entity.Ministere;
 
 public interface MinistereRepository extends JpaRepository<Ministere, Long> {
 
-	
-	
 }

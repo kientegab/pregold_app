@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spmabg.appsuivipregols.entity.ApiResponse;
@@ -53,12 +54,25 @@ public class UtilisateurController {
         List<Utilisateur> utilisateurs= utilisateurService.getAllUtilisateurs();
         return ResponseEntity.ok(utilisateurs);
     }
-
+    
+    
+    @GetMapping("/compte/{id}/fullname")
+    public ResponseEntity<String> getNomCompletUtilisateur(@PathVariable Long id) {
+        try {
+            String nomComplet = utilisateurService.getNomCompletUtilisateur(id);
+            return ResponseEntity.ok(nomComplet);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
     @GetMapping("/compte/{id}")
     public ResponseEntity<Utilisateur> getUtilisateurById(@PathVariable("id") Long id) {
         Optional<Utilisateur> optionalUtilisateur = utilisateurService.getUtilisateurById(id);
         return optionalUtilisateur.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
+    
+    
 
     @PutMapping("/compte/{id}")
     public ResponseEntity<Optional<Utilisateur>> updateUtilisateur(@PathVariable("id") Long id, @RequestBody Utilisateur updatedUtilisateur) {
